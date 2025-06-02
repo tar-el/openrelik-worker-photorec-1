@@ -26,6 +26,10 @@ ENV OPENRELIK_PYDEBUG_PORT ${OPENRELIK_PYDEBUG_PORT:-5678}
 # Set working directory
 WORKDIR /openrelik
 
+# Install exiftool
+RUN apt-get update && apt-get install -y testdisk && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy poetry toml and install dependencies
 COPY ./pyproject.toml ./poetry.lock ./
 RUN poetry install --no-interaction --no-ansi
